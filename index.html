@@ -15,7 +15,7 @@
         url: "https://api.github.com/repos/saulvhwoolf/dashingboard/git/trees/main",
         dataType: "json"
       }).done(function(result) {
-        dataContainer.text(result);
+        dataContainer.text(JSON.stringify(result));
       });
 
     });
