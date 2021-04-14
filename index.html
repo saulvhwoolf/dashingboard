@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
 <script>
   // find elements
 var dataContainer = $("#data-container");
@@ -8,7 +12,7 @@ var btn = $("#btn1");
 btn.on("click", function(e) {
 
   $.ajax({
-    url: "https://raw.githubusercontent.com/alv2017/DataSets/master/Europe/europe-capital-cities.json",
+    url: "https://raw.githubusercontent.com/saulvhwoolf/dashingboard/main/data/cities.json",
     dataType: "json"
   }).done(function(result) {
     let id = Math.floor(Math.random() * 44);
