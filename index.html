@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<script>
+  // find elements
+var dataContainer = $("#data-container");
+var btn = $("#btn1");
+
+// handle click and add class
+btn.on("click", function(e) {
+
+  $.ajax({
+    url: "https://raw.githubusercontent.com/alv2017/DataSets/master/Europe/europe-capital-cities.json",
+    dataType: "json"
+  }).done(function(result) {
+    let id = Math.floor(Math.random() * 44);
+    let country = result['European Capitals'][id]['capital_name'];
+    let latitude = result['European Capitals'][id]['latitude'];
+    let longitude = result['European Capitals'][id]['longitude'];
+
+    let dstring = "Country name: " + country + ", Latitude: " + latitude + ", Longitude: " + longitude;
+    dataContainer.text(dstring);
+  });
+
+});
+
+</script>
+<style>
+body {
+  background: white;
+  padding: 20px;
+  font-family: Helvetica;
+}
+
+#data-container {
+  background: #e1e1e1;
+  border-radius: 4px;
+  padding: 20px;
+  font-size: 15px;
+  text-align: center;
+  transition: all 0.2s;
+  margin: 10px auto;
+  width: 300px;
+}
+
+button {
+  background: #0084ff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 14px;
+  font-size: 15px;
+  color: #fff;
+}
+
+</style>
+<div>
+  <p>Hello JSON</p>
+  <button id="btn1">Get Data!</button>
+  <div id="data-container">Click <b style="color:royalblue;">Get Data!</b> button</div>
+</div>
