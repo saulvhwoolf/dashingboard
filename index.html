@@ -16,7 +16,12 @@
         dataType: "json"
       }).done(function(result) {
         dataContainer.text(JSON.stringify(result, null, 2));
-        console.log(result["tree"][0]);
+        $.ajax({
+          url: result["tree"][0]["url"],
+          dataType: "json"
+        }).done(function(result2) {
+          console.log(JSON.stringify(result2, null, 2));
+        });
       });
 
     });
@@ -52,7 +57,7 @@ button {
 
 </style>
 <div>
-  <p>version 13</p>
+  <p>version 15</p>
   <button id="btn1">Get Data!</button>
   <div id="data-container">No data</div>
 </div>
