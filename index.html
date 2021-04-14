@@ -11,18 +11,25 @@
     btn.on("click", function(e) {
       console.log("sup");
 
+      
       $.ajax({
-        url: "https://api.github.com/repos/saulvhwoolf/dashingboard/git/trees/main",
+        url: "https://api.github.com/repos/saulvhwoolf/dashingboard/git/trees/cac262652a0645e28781c6c28b8eae0d34c9e4ed",
         dataType: "json"
       }).done(function(result) {
         dataContainer.text(JSON.stringify(result, null, 2));
-        $.ajax({
-          url: result["tree"][0]["url"],
-          dataType: "json"
-        }).done(function(result2) {
-          console.log(JSON.stringify(result2, null, 2));
-        });
       });
+//       $.ajax({
+//         url: "https://api.github.com/repos/saulvhwoolf/dashingboard/git/trees/main",
+//         dataType: "json"
+//       }).done(function(result) {
+//         dataContainer.text(JSON.stringify(result, null, 2));
+//         $.ajax({
+//           url: result["tree"][0]["url"],
+//           dataType: "json"
+//         }).done(function(result2) {
+//           console.log(JSON.stringify(result2, null, 2));
+//         });
+//       });
 
     });
   });
@@ -57,7 +64,7 @@ button {
 
 </style>
 <div>
-  <p>version 15</p>
+  <p>version 16</p>
   <button id="btn1">Get Data!</button>
   <div id="data-container">No data</div>
 </div>
