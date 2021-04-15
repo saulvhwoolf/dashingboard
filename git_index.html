@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+  $( document ).ready(function() {
+     // find elements
+    var dataContainer = $("#data-container");
+    var btn = $("#btn1");
+
+    // handle click and add class
+    btn.on("click", function(e) {
+      console.log("sup");
+      dataContainer.text("Loading");
+
+      
+      
+      $.ajax({
+        url: "https://api.github.com/repos/saulvhwoolf/dashingboard/git/trees/main",
+        dataType: "json"
+      }).done(function(result) {
+        var dataFolderUrl = result["tree"][0]["url"]
+        $.ajax({
+          url: dataFolderUrl,
+          dataType: "json"
+        }).done(function(result2) {
+          console.log(result2["tree"])
+          var urls = [];
+          for (i = 0; i < result2["tree"].length; i++) {
+            urls.push(result2["tree"][i]["url"])
+          }
+          dataContainer.innerhtml(urls.join(", "));
+        });
+      });
+      
+//       $.ajax({
+//         url: "https://api.github.com/repos/saulvhwoolf/dashingboard/git/trees/cac262652a0645e28781c6c28b8eae0d34c9e4ed",
+//         dataType: "json"
+//       }).done(function(result) {
+//         dataContainer.text(JSON.stringify(result["tree"], null, 2));
+//       });
+      
+      
+//       $.ajax({
+//         url: "https://api.github.com/repos/saulvhwoolf/dashingboard/git/trees/main",
+//         dataType: "json"
+//       }).done(function(result) {
+//         dataContainer.text(JSON.stringify(result, null, 2));
+//         $.ajax({
+//           url: result["tree"][0]["url"],
+//           dataType: "json"
+//         }).done(function(result2) {
+//           console.log(JSON.stringify(result2, null, 2));
+//         });
+//       });
+
+    });
+  });
+</script>
+
+<style>
+body {
+  background: white;
+  padding: 20px;
+  font-family: Helvetica;
+}
+
+#data-container {
+  background: #e1e1e1;
+  border-radius: 4px;
+  padding: 20px;
+  font-size: 15px;
+  text-align: center;
+  transition: all 0.2s;
+  margin: 10px auto;
+  width: 800px;
+}
+
+button {
+  background: #0084ff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 14px;
+  font-size: 15px;
+  color: #fff;
+}
+
+</style>
+<div>
+  <p>version 20</p>
+  <button id="btn1">Get Data!</button>
+  <div id="data-container">No data</div>
+</div>
